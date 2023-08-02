@@ -1,10 +1,14 @@
 /* constants */
 const bookList = document.querySelector("#book-list");
-
+const newBookBtn = document.querySelector("#toggleForm")
+const bookForm = document.querySelector("#book-form")
 /**
  * 
  * Renders a book card to DOM given a book object
  */
+function removeBook(li){
+  li.remove()
+}
 function renderBook(book) {
 	const li = document.createElement("li");
 	li.className = "card";
@@ -22,7 +26,7 @@ function renderBook(book) {
 	//✅ 1. on delete button click, remove card from DOM
 	//✅ 1a. attach eventListener
 	//✅ 1b. include callback function to remove card instance
-
+  deleteBtn.addEventListener('click', ()=>{removeBook(li)})
 	//✅ 1c. define cb outside of renderBook
 
 	bookList.append(li);
@@ -38,7 +42,17 @@ function renderBook(book) {
 //✅ 2b. write a testing function to fill in the values of the form
 //✅ 2c. invoke the fill in function
 //✅ 2d. create the event listener 
-
+bookForm.addEventListener('submit', (e)=>{
+  e.preventDefault()
+  let newBook = {
+    title: e.target.title.value,
+    author: e.target.author.value,
+    price: e.target.price.value,
+    imageUrl: e.target.imageUrl.value,
+    inventory: e.target.inventory.value,
+  }
+  renderBook(newBook)
+})
 	//✅ 2e. create the new book and add to DOM
 
 
@@ -47,6 +61,7 @@ function renderBook(book) {
 //✅ 3b. add the event listener
 	//✅ 3c. hide/show the form
 	//✅ 3d. update the button text
+  newBookBtn.addEventListener('click',(e)=>{if(bookForm.classList.contains("collapsed")){bookForm.classList.remove("collapsed");newBookBtn.textContent="Close New Book Form"}else{bookForm.classList.add("collapsed");newBookBtn.textContent="New Book Form"}}) 
 
 
 /*
