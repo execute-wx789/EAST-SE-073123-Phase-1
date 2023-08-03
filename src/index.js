@@ -13,16 +13,26 @@ const bookForm = document.querySelector('#book-form'); //book form
 ///////////////////////////////
 // communicating with server //
 ///////////////////////////////
+const dataHost = "http://localhost:3000"
+fetch(`${dataHost}/books`)
+  .then(response => response.json())
+  .then(data => data.forEach(renderBook))
 //✅ 2. fetch request to get all books
 //✅ 2a. save the base url as a const (to reuse later)
-  //✅ 2b. render books from database instead of from data.js
-
-
+//✅ 2b. render books from database instead of from data.js
+fetch(`${dataHost}/stores/2`)
+  .then(response => response.json())
+  .then(data => {
+	renderHeader(data)
+	renderFooter(data)
+})
 //✅ 3. use db.json to get information about the store
 //✅ 3a. make a fetch request
   //✅ 3b. use data to update DOM
 //✅ 3c. add a .catch for errors
-
+.catch(err => {
+	alert("Failed to load data")
+})
 /**
  * 
  * 
