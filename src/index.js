@@ -61,7 +61,7 @@ bookForm.addEventListener('submit', (e)=>{
 //✅ 3b. add the event listener
 	//✅ 3c. hide/show the form
 	//✅ 3d. update the button text
-  newBookBtn.addEventListener('click',(e)=>{if(bookForm.classList.contains("collapsed")){bookForm.classList.remove("collapsed");newBookBtn.textContent="Close New Book Form"}else{bookForm.classList.add("collapsed");newBookBtn.textContent="New Book Form"}}) 
+newBookBtn.addEventListener('click',(e)=>{if(bookForm.classList.contains("collapsed")){bookForm.classList.remove("collapsed");newBookBtn.textContent="Close New Book Form"}else{bookForm.classList.add("collapsed");newBookBtn.textContent="New Book Form"}}) 
 
 
 /*
