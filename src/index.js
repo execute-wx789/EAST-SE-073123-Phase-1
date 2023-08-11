@@ -54,9 +54,19 @@ storeForm.addEventListener("submit", (e) => {
 	if (storeEditMode) {
 		//✅ 1. update new store in database
 		//✅ 1a. create marker for current store in editStoreButton on click event
-    	//✅ 1b. update the store in the DOM - pessimistic rendering - and persist store
-		
-
+    //✅ 1b. update the store in the DOM - pessimistic rendering - and persist store
+		let storeDropdown = document.querySelector("#store-selector")
+    let id = storeDropdown.value
+    fetch(`${url}/stores/${id}`,{
+      method: "PATCH",
+      headers: {"content-type": "application/json"},
+      body: JSON.stringify(store),
+    })
+    .then(res=>res.json())
+    .then(data => {
+      renderHeader(data)
+      renderFooter(data)
+    })
 	//✅ 1c. create new store and add to database
 	} else {
 

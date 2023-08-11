@@ -7,6 +7,7 @@ function renderBook(book) {
 	const imgNode = document.createElement("img");
 	const deleteBtn = document.createElement("button");
 	const pInventory = document.createElement("input");
+	const id = book.id
 
 	li.className = "card";
 	titleNode.textContent = book.title;
@@ -18,14 +19,26 @@ function renderBook(book) {
 
 	deleteBtn.textContent = "Delete";
 	deleteBtn.addEventListener("click", (e) => {
-
+		fetch(`${url}/books/${id}`,{
+			method: "DELETE"
+		})
+		.then(res=>res.json())
+		.then(()=>{li.remove()})
 		//✅ 2a. update the server with a delete request
-
 	});
 
 	//✅ 3. update the inventory
 	//✅ 3a. add an onChange event handler
-
+    pInventory.addEventListener("change",(e)=>{
+		e.preventDefault()
+		let newInventory = e.target.value
+		fetch(`${url}/books/${id}`,{
+			method: "PATCH",
+			headers: {"content-type": "application/json"},
+			body: JSON.stringify({inventory: newInventory}),
+		  })
+		  .then(res=>res.json())
+	})
 	//✅ 4. generate CSS using chatGPT in chatgpt_style.css
 
 	const pStock = document.createElement("p");
